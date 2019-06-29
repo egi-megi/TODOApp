@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+
+<body>
+
+  <style>
+    .buttons {
+      background-color: darkblue;
+      color: white;
+      margin: 10px;
+      padding-left: 20px;
+      padding-right: 20px;
+      padding-bottom: 10px;
+      padding-top: 10px;
+      font-size: small;
+    }
+  </style>
+
+  <style>
+    .heading {
+      margin-left: 10px;
+      margin-bottom: -10px;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+
+  <style>
+    .listItems {
+      color: darkblue;
+      margin-left: 13px;
+      line-height: 30px;
+      font-size: medium;
+      font-family: 'Courier New', Courier, monospace;
+    }
+  </style>
+
+
+
+  <script>
+    function addTasks() {
+      var amountOfItems = 0;
+      if (document.getElementsByTagName('li').length == 0) {
+        amountOfItems = 0;
+        document.getElementById("headingOfList").innerHTML = "Tasks to do:";
+      } else {
+        amountOfItems = document.getElementsByTagName("li").length;
+      }
+      amountOfItems++;
+
+      var nextTask = ('Task number ' + amountOfItems);
+      var entry = document.createElement('li');
+      entry.appendChild(document.createTextNode(nextTask));
+      var listItem = document.getElementById('tasks').appendChild(entry);
+      listItem.setAttribute('id', '' + amountOfItems);
+    }
+
+
+    function removeTask() {
+      var amountOfItems;
+      amountOfItems = document.getElementsByTagName("li").length;
+      if (amountOfItems > 0) {
+        var list = document.getElementById('tasks');
+        var listItem = document.getElementById('' + amountOfItems);
+        list.removeChild(listItem);
+      }
+      if (amountOfItems <= 1) {
+        document.getElementById('headingOfList').innerHTML = "You have no tasks to do :)"
+      }
+
+    }
+
+
+    function clearAllTask() {
+      var amountOfItems = 0;
+      if (document.getElementsByTagName('li').length == 0) {
+        amountOfItems = 0;
+      } else {
+        amountOfItems = document.getElementsByTagName("li").length;
+      }
+
+
+      for (var i = amountOfItems; i > 0; i--) {
+        var listName = document.getElementById('tasks');
+        var listItem = document.getElementById('' + i);
+        listName.removeChild(listItem);
+      }
+      document.getElementById('headingOfList').innerHTML = "You have no tasks to do :)"
+
+    }
+
+  </script>
+
+  <br>
+
+  <button type="button" class="buttons" onclick="addTasks()">
+    Add</button>
+
+  <button type="button" class="buttons" onclick="removeTask()">
+    Remove</button>
+
+  <button type="button" class="buttons" onclick="clearAllTask()">
+    Clear</button>
+
+  <br>
+
+  <h4 id='headingOfList' class="heading">You have no tasks to do :)</h4>
+
+  <ul id="tasks" class="listItems">
+  </ul>
+
+</body>
+
+</html>
